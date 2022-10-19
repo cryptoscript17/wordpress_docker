@@ -1,0 +1,38 @@
+version: "2.3"
+services:
+  restfulapi-db:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     networks:
+       - restfulapi_bridged
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: wordpress
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+    
+  restfulapi-wordpress:
+     depends_on:
+       - restfulapi-db
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     networks:
+       - restfulapi_bridged
+     environment:
+       WORDPRESS_DB_HOST: restfulapi-db:3306
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+       WORDPRESS_DB_NAME: wordpress
+     volumes:        
+       - C:\Users\superuser\_pytho_scripts\wp_docker\wordpress:/var/www/html
+ 
+networks:
+  restfulapi_bridged:
+    driver: bridge
+ 
+volumes:
+    db_data: {}
