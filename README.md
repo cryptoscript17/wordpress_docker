@@ -11,6 +11,6 @@
 
 3) Выполнить сборку командой:
 
-    docker_compose up -d
+    docker-compose up -d
     
 4) Сайт будет доступен локально по адресу [http://localhost:8000], а БД работает на TCP 3306.
